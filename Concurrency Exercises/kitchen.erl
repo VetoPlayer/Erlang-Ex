@@ -22,7 +22,9 @@ fridge(FoodList) ->
                     fridge(FoodList)
             end;
         terminate ->
-            ok
+            ok;
+        Unexpected ->
+            io:format("unexpected message ~p~n", [Unexpected])
     end.
 
 %% Let's define a standard way to interact with a fridge from the shell without forcing the shell to know how
