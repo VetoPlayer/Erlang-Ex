@@ -2,19 +2,13 @@
 
 -behaviour(supervisor).
 %% Starts the whole server, stops it, starts ands stops a specific pool.
--export([start_link/0, stop/0, start_pool/3, stop_pool/1]).
+-export([start_link/0, start_pool/3, stop_pool/1]).
 -export([init/1]).
 
 %% Starts the super-supervisor and gives it the name of ppool.
 start_link() ->
     supervisor:start_link({local,ppool},?MODULE,[]).
 
-stop() ->
-    case whereis(ppool) of
-        P when is_pid(P) ->
-            exit(P,kill);
-        _ -> ok
-    end.
 
 init([]) ->
     MaxRestart = 6,
